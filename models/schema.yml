@@ -1,8 +1,31 @@
 version: 2
 
 sources:
-  - name: gz_raw_data
+  - name: raw
+    schema: gz_raw_data
     tables:
-      - name: raw_gz_sales
-      - name: raw_gz_product
-      - name: raw_gz_ship
+      - name: sales
+        identifier: raw_gz_sales
+        description: Sales of Greenweez  we have one row per product_id found in each orders_id
+        columns:
+          - name: date_date
+            description: Date of purchase
+
+      - name: product
+        identifier: raw_gz_product
+        description: Products of Greenweez
+        columns:
+          - name: products_id
+            description: products ID for the product
+            tests:
+              - unique
+              - not_null
+
+      - name: ships
+        identifier: raw_gz_ship
+        description: Orders of Greenweez
+        columns:
+          - name: orders_id
+            description: Unique ID of each order
+            tests:
+              - unique
